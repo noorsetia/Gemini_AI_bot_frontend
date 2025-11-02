@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { sendMessage } from "../services/api";
+import "./ChatComponent.css";
 
 function ChatComponent() {
   const [message, setMessage] = useState("");
@@ -59,3 +60,4 @@ function ChatComponent() {
 }
 
 export default ChatComponent;
+
