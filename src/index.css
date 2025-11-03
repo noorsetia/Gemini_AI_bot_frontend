@@ -1,68 +1,110 @@
-/* :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+:root {
+  --page-bg: linear-gradient(180deg, #07102a 0%, #071427 60%);
+  --panel: rgba(255,255,255,0.96);
+  --muted: #64748b;
+  --text: #0f172a;
+  --accent-1: #6366f1; /* indigo */
+  --accent-2: #06b6d4; /* teal */
+  --glass: rgba(255,255,255,0.6);
+  --radius: 12px;
+  --shadow-1: 0 10px 30px rgba(2,6,23,0.35);
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* chat-specific */
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,248,255,0.95));
+  --card-text: #0f172a;
+  --bubble-user: linear-gradient(180deg, #2563eb, #1e40af);
+  --bubble-user-text: #ffffff;
+  --bubble-assistant: linear-gradient(180deg, #ffffff, #f8fafc);
+  --bubble-assistant-text: #0f172a;
+  --input-bg: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));
+  --input-text: #0f172a;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Dark theme overrides */
+body.dark {
+  --page-bg: linear-gradient(180deg, #07102a 0%, #071427 60%);
+  --panel: rgba(12,18,33,0.7);
+  --muted: #9aa6bf;
+  --text: #e6eef8;
+  --card-bg: linear-gradient(180deg, rgba(8,10,20,0.9), rgba(12,16,28,0.9));
+  --card-text: #e6eef8;
+  --bubble-user: linear-gradient(180deg, #0ea5e9, #2563eb);
+  --bubble-user-text: #ffffff;
+  --bubble-assistant: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  --bubble-assistant-text: #e6eef8;
+  --input-bg: linear-gradient(90deg, rgba(12,16,28,0.9), rgba(10,14,24,0.9));
+  --input-text: #e6eef8;
+  --shadow-1: 0 10px 30px rgba(2,6,23,0.8);
 }
 
+/* Light theme overrides */
+body.light {
+  --page-bg: linear-gradient(180deg, #f8fafc 0%, #eef2ff 60%);
+  --panel: rgba(255,255,255,0.96);
+  --muted: #475569;
+  --text: #0f172a;
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,248,255,0.95));
+  --card-text: #0f172a;
+  --bubble-user: linear-gradient(180deg, #2563eb, #1e40af);
+  --bubble-user-text: #ffffff;
+  --bubble-assistant: linear-gradient(180deg, #ffffff, #f8fafc);
+  --bubble-assistant-text: #0f172a;
+  --input-bg: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));
+  --input-text: #0f172a;
+  --shadow-1: 0 10px 30px rgba(2,6,23,0.35);
+}
+
+/* Reset & base */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
 body {
   margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--page-bg);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* rest unchanged... */
+a { color: var(--accent-1); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.app-root {
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  gap: 20px;
+  padding: 28px;
   min-height: 100vh;
+  align-items: flex-start;
+  justify-content: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.main-area {
+  flex: 1 1 auto;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-button {
+.content-area {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: stretch;
+}
+
+.hidden { display: none !important; }
+.small { font-size: 0.9rem; }
+.center { display:flex; align-items:center; justify-content:center; }
+
+@media (max-width: 880px) {
+  .app-root { padding: 18px; }
+  .main-area { max-width: 100%; }
+}
+
+button:focus, input:focus, textarea:focus, select:focus {
+  outline: 3px solid rgba(99,102,241,0.14);
+  outline-offset: 2px;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
